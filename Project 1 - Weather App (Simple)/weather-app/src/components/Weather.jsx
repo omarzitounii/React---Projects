@@ -1,4 +1,4 @@
-import React, { useState,  useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import Spinner from './Spinner';
 
@@ -15,8 +15,7 @@ import humidity_icon from "../assets/humidity.png";
 
 const Weather = () => {
   const [weatherData, setWeatherData] = useState(null);
-  const [inputCity, setInputCity] = useState("");
-  const [loading, setLoading] = useState(false);
+  const inputRef = useRef();
 
   const allIcons = {
     "01d": clear_icon,
@@ -40,7 +39,6 @@ const Weather = () => {
       alert("Enter city name please!");
       return;
     }
-    setLoading(true); 
     try {
       const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${
         import.meta.env.VITE_APP_ID
@@ -50,8 +48,6 @@ const Weather = () => {
       const data = await response.json();
       if (data.cod === "404") {
         alert("City not found!");
-        setInputCity("");
-        setLoading(false); 
         return;
       }
 
@@ -63,12 +59,9 @@ const Weather = () => {
         humidity: data.main.humidity,
         windSpeed: data.wind.speed,
       });
-      setInputCity("");
     } catch (error) {
       console.log(error);
-      setInputCity("");
     }
-    setLoading(false); 
   };
 
   useEffect(() => {
@@ -79,29 +72,23 @@ return (
     <>
     <div className="flex items-center gap-5 w-full">
         <input
+        ref={inputRef}
         type="text"
         placeholder="Search"
-        value={inputCity}
-        onChange={(e) => setInputCity(e.target.value)}
         className="py-2 ps-6 border-2 border-gray-200 rounded-full placeholder-gray-200 text-gray-200 text-xl outline-0 w-[80%]"
         onKeyDown={(e) => {
-        if (e.key === 'Enter' && inputCity.trim()) {
-            getWeatherData(inputCity);
+        if (e.key === 'Enter') {
+            getWeatherData(inputRef.current.value);
         }
         }}
         />
         <button
-        onClick={() => getWeatherData(inputCity)}
-        disabled={!inputCity.trim()}
+        onClick={() => getWeatherData(inputRef.current.value)}
         className="w-[20%]"
         >
         <FontAwesomeIcon
             icon={faSearch}
-            className={`text-xl p-3 rounded-full ${
-            inputCity.trim()
-                ? "text-gray-600 bg-gray-200 cursor-pointer"
-                : "text-gray-400 bg-gray-100 cursor-not-allowed"
-            }`}
+            className={`text-xl p-3 rounded-full text-gray-600 bg-gray-200 cursor-pointer`}
         />
         </button>
     </div>
