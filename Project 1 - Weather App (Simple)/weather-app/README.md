@@ -9,8 +9,9 @@ This is a simple React app that fetches and displays real-time weather data for 
 
 <ul>
 <li>React</li>
-<li>Tailwind CSS</li>
 <li>OpenWeatherMap API</li>
+<li>Tailwind CSS</li>
+<li>Vite</li>
 </ul>
 
 ## How to Use

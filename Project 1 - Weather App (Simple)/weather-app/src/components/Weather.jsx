@@ -1,7 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 
-import Spinner from './Spinner';
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
@@ -59,6 +57,7 @@ const Weather = () => {
         humidity: data.main.humidity,
         windSpeed: data.wind.speed,
       });
+      inputRef.current.value = "";
     } catch (error) {
       console.log(error);
     }
