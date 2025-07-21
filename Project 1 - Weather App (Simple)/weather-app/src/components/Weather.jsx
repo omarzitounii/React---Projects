@@ -74,7 +74,7 @@ return (
         ref={inputRef}
         type="text"
         placeholder="Search"
-        className="py-2 ps-6 border-2 border-gray-200 rounded-full placeholder-gray-200 text-gray-200 text-xl outline-0 w-[80%]"
+        className="py-2 ps-6 border-2 border-gray-200 rounded-full placeholder-gray-200 text-gray-200 text-lg sm:text-xl outline-0 w-[80%]"
         onKeyDown={(e) => {
         if (e.key === 'Enter') {
             getWeatherData(inputRef.current.value);
@@ -87,7 +87,7 @@ return (
         >
         <FontAwesomeIcon
             icon={faSearch}
-            className={`text-xl p-3 rounded-full text-gray-600 bg-gray-200 cursor-pointer`}
+            className={`text-lg sm:text-xl p-3 rounded-full text-gray-600 bg-gray-200 cursor-pointer`}
         />
         </button>
     </div>
@@ -95,20 +95,20 @@ return (
     <img
         src={weatherData?.icon}
         alt="Weather Icon"
-        className="my-4 mx-auto"
+        className="sm:my-4 mx-auto scale-75 sm:scale-100"
     />
-    <p className="text-7xl">{weatherData?.temperature}</p>
-    <p className="text-4xl">{weatherData?.location}</p>
+    <p className="text-5xl sm:text-7xl">{weatherData?.temperature}</p>
+    <p className="text-3xl sm:text-4xl">{weatherData?.location}</p>
 
-    <div className="flex justify-between mt-20 w-full">
+    <div className="flex justify-between mt-8 sm:mt-20 w-full">
         <div className="flex flex-col items-center sm:items-start sm:flex-row gap-3">
         <img
             src={humidity_icon}
             alt="humidity-icon"
-            className="w-8 h-8 object-contain"
+            className="w-5 h-5 sm:w-8 sm:h-8 object-contain"
         />
         <div className="flex flex-col items-center sm:items-start sm:-mt-1">
-            <p className="text-3xl">{weatherData?.humidity}</p>
+            <p className="text-xl sm:text-3xl">{weatherData?.humidity}</p>
             <span>Humidity</span>
         </div>
         </div>
@@ -117,10 +117,10 @@ return (
         <img
             src={wind_icon}
             alt="wind-icon"
-            className="w-8 h-8 object-contain"
+            className="w-5 h-5 sm:w-8 sm:h-8 object-contain"
         />
         <div className="flex flex-col items-center sm:items-start sm:-mt-1">
-            <p className="text-3xl">{weatherData?.windSpeed} Km/h</p>
+            <p className="text-xl sm:text-3xl">{weatherData?.windSpeed} <span className="text-sm sm:text-xl">Km/h</span></p>
             <span>Wind speed</span>
         </div>
         </div>
