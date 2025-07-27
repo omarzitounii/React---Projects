@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router";
+import Navbar from "./components/Navbar";
 import HomePage from "./pages/home";
+import AboutPage from "./pages/about";
+import CoinDetailsPage from "./pages/coin-details";
+import NotFoundPage from "./pages/not-found";
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = import.meta.env.VITE_COINS_API_URL;
 
 const App = () => {
   const [coins, setCoins] = useState([]);
@@ -18,7 +22,7 @@ const App = () => {
         const response = await fetch(
           `${API_URL}&order=market_cap_desc&per_page=${limit}&page=1&sparkline=false`
         );
-        if (!response.ok) throw new Error("Failed to fetch data");
+        if (!response.ok) throw new Error("Failed to fetch coins!");
         const data = await response.json();
         setCoins(data);
       } catch (err) {
@@ -31,20 +35,25 @@ const App = () => {
   }, [limit]);
 
   return (
-    <Routes>
-      <Route path="/" element={<HomePage
-      coins={coins}
-      filter={filter}
-      limit={limit}
-      sortBy={sortBy}
-      loading={loading}
-      error={error}
-      setLimit={setLimit}
-      setFilter={setFilter}
-      setSortBy={setSortBy}
-    />} />
-      
-    </Routes>
+    <>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<HomePage
+        coins={coins}
+        filter={filter}
+        limit={limit}
+        sortBy={sortBy}
+        loading={loading}
+        error={error}
+        setLimit={setLimit}
+        setFilter={setFilter}
+        setSortBy={setSortBy}
+      />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/coin/:id" element={<CoinDetailsPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </>
   );
 };
 

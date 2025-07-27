@@ -2,6 +2,7 @@ import Card from "../components/Card"
 import LimitSelector from "../components/LimitSelector";
 import FilterInput from "../components/FilterInput";
 import SortSelector from "../components/SortSelector";
+import Spinner from "../components/Spinner";
 
 const HomePage = ({
   coins,
@@ -42,14 +43,12 @@ const HomePage = ({
       </div>
 
       {loading && (
-        <p style={{ textAlign: "center", fontSize: "2rem", marginTop: "3rem" }}>
-          Loading...
-        </p>
+        <Spinner />
       )}
       {error && (
         <div
           className="error"
-          style={{ textAlign: "center", fontSize: "2rem", marginTop: "3rem" }}
+          style={{ textAlign: "center", fontSize: "2rem"}}
         >
           {error}
         </div>
@@ -64,7 +63,6 @@ const HomePage = ({
               style={{
                 textAlign: "center",
                 fontSize: "2rem",
-                marginTop: "3rem",
               }}
             >
               No matching coins
