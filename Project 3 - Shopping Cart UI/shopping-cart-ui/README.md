@@ -7,7 +7,7 @@ Note: In this project you must also start the json server in a second terminal.
 
 ##
 
-This is a responsive and interactive shopping cart built with React, Tailwind CSS, and json-server for mock API data. This project allows users to browse products, add/remove items to/from the cart, view quantities, and see the total price update in real-time.
+This is a responsive and interactive shopping cart UI built with React This project allows users to browse products, add/remove items to/from the cart, view quantities, and see the total price update.
 
 <br>
 
